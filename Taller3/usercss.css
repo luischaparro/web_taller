@@ -13,3 +13,7 @@ button{
     border-radius: 30px;
     padding: 7px;
 }
+.select{
+    width: 200px;
+    text-align: center;
+}
