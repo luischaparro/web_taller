@@ -1,12 +1,72 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller4</title>
-</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    </head>
 <body>
-Para ya
+    <div class="container">
+    <form>
+        <div class="form-group">
+        <label for="id_usr">Id usuario</label> <br>
+        <input type="number" name="CV_id_user" id="id_usr" class="form-control"> <br>
+
+        
+        <label for="id_pais">Id pais</label> <br>
+        <select name="CV_id_pais" id="id_pais" class="form-control">
+            <option value="Cl">Colombia</option>
+            <option value="Sp">España</option>
+            <option value="Ch">Chile</option>
+        </select> <br>
+
+        <label for="nombre">Nombre</label> <br>
+        <input type="text" minlength="5" maxlength="25" name="CV_nombre" id="nombre" class="form-control" value="" onkeyup="this.value=NumText(this.value)"> <br>
+        
+    <! Falta añadir las opciones de que le avise al usuario sobre el minimo https://developer.mozilla.org/en-US/docs/Web/API/ValidityState/tooShort >
+        
+        <label for="apellido">Apellido</label> <br>
+        <input type="text" minlength="5" maxlength="25" name="CV_apellido" id="apellido" class="form-control" value="" onkeyup="this.value=NumText(this.value)"> <br>
+
+    <! Falta añadir las opciones de que le avise al usuario sobre el minimo>
+
+        <label for="direccion">Direccion</label> <br>
+        <select style="width:70px" name="CV_direccion" id="direccion" class="form-control"> 
+            <option value="Cll">Cll</option>
+            <option value="Cra">Cra</option>
+            <option value="Av">Av</option>
+            <option value="Anv">Anv</option>
+            <option value="Trans">Trans</option>
+        </select>
+        <input type="text" minlength="1" maxlength="25" name="CV_direccion1" id="direccion2" class="form-control">
+         <br>
+
+        <label for="ccusuario"> Usuario</label> <br>
+        <input type="text" minlength="10" maxlength="20" name="CV_ccusuario" id="ccusuario" class="form-control" value="" onkeyup="this.value=NumText(this.value)"> <br>
+
+        <label for="ccpaswd"> Contraseña</label> <br>
+        <input type="password" minlength="15" maxlength="25" name="CV_ccpaswd" id="ccpaswd" class="form-control" value="" onkeyup="this.value=NumTextEx(this.value)"> <br>
+
+        <label for="ccpaswd"> Confirmacion Contraseña</label> <br>
+        <input type="password" minlength="15" maxlength="25" name="CV_ccpaswdconfirm" id="ccpaswdconfirm" class="form-control" value="" onkeyup="this.value=NumTextEx(this.value)"> <br>
+
+    <! Falta añadir la confirmacion sobre que las contraseñas coincidan y confirmaciones>
+
+        <label for="email">Email</label> <br>
+        <input type="email" minlength="10" maxlength="120"name="CV_email" id="email" class="form-control"> <br>
+
+        <label for="telefono">Telefono</label> <br>
+        <input type="text" maxlength="20" name="CV_telefono" id="telefono" class="form-control"> <br>
+        
+        </div>
+        <br>
+        <form action="gustos.html">
+            <button style="background-color:aquamarine;"type="submit" class="btn btn-default">Registrar</button> <!-- Boton -->
+          </form>
+    </form>
+    </div>
 </body>
 </html>
