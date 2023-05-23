@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3 class="text-center py-3">Documentos</h3>
+            <ul class="list-group">
+                {% for D in objetosD %}
+                <a href="{% url 'datos_ver_D' D.id %}" class="list-group-item">
+
+                    <p>{{D.nombre}}</p>
+                    <p>{{D.descripcion}}</p>
+
+                </a>
+                {% endfor %}
+            </ul>
+
+            <h3 class="text-center py-3">Ciudades</h3>
+            <ul class="list-group">
+                {% for C in objetosC %}
+                <a href="{% url 'datos_ver_C' C.id %}" class="list-group-item">
+
+                    <p>{{C.nombre}}</p>
+                    <p>{{C.descripcion}}</p>
+
+                </a>
+                {% endfor %}
+            </ul>
+
+            <h3 class="text-center py-3">Personas</h3>
+            <ul class="list-group">
+                {% for P in objetosP %}
+                <a href="{% url 'datos_ver_P' P.id %}" class="list-group-item">
+
+                    <p>{{P.nombres}} {{P.apellidos}}</p>
+                    <p>{{P.idtipodocumento}} {{P.documento}}</p>
+                    <p>{{P.lugarresidencia}}</p>
+                    <p>nació el {{P.fechanacimiento}}</p>
+                    <p>correo {{P.email}}</p>
+                    <p>telefono {{P.telefono}}</p>
+                    <p>{{P.usuario}}</p>
+                    <p>{{P.password}}</p>
+
+                </a>
+                {% endfor %}
+            </ul>
+
+            <div class="m-5"></div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

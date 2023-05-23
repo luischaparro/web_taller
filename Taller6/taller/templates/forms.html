@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main class="container">
+    <div class="row">
+        <div class="col-4 offset-4">
+            <h1 class="text-center display-5">Crear {{name}}</h1>
+            <form action="" method="POST" class="card card-body">
+
+                {% csrf_token %}
+                {{form}}
+
+                <button class="btn btn-primary mt-4">
+                    Crear
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
