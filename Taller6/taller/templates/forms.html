@@ -8,6 +8,8 @@
             <h1 class="text-center display-5">Crear {{name}}</h1>
             <form action="" method="POST" class="card card-body">
 
+                {{error}}
+
                 {% csrf_token %}
                 {{form}}
 

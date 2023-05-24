@@ -1,7 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-4 offset-4">
+            <h1 class="text-center display-5">{{dato}}</h1>
+            <form action="" method="POST" class="card card-body">
 
-{{form}}
+                {{error}}
+                {% csrf_token %}
+                {{form}}
+
+                <button class="btn btn-primary mt-4">
+                    Modificar
+                </button>
+
+                <a href="{% url 'datos_ver_delete' dato.id tipo%}" class="btn btn-primary mt-4">Eliminar</a>
+            </form>
+        </div>
+    </div>
+</main>
 
 {% endblock %}

@@ -13,5 +13,6 @@ urlpatterns = [
     path('datos/<int:dato_id>/D', views.datos_ver_D, name="datos_ver_D"),
     path('datos/<int:dato_id>/C', views.datos_ver_C, name="datos_ver_C"),
     path('datos/<int:dato_id>/P', views.datos_ver_P, name="datos_ver_P"),
+    path('datos/<int:dato_id>/delete/<str:tipo>', views.datos_ver_delete, name="datos_ver_delete"),
 ]
 
