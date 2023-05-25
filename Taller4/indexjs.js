@@ -29,3 +29,10 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 
+const value = document.querySelector("#valorescarro")
+const input = document.querySelector("#myRange")
+value.textContent = input.value
+input.addEventListener("input", (event) => {
+  value.textContent = event.target.value
+})
+
