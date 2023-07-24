@@ -1,12 +1,159 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller5</title>
-</head>
-<body>
-No tiene fecha
-</body>
+<html>
+  <head>
+    <title>Mi Página Web</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      nav ul li {
+        margin-right: 20px;
+      }
+
+      nav ul li:last-child {
+        margin-right: 0;
+      }
+
+      nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 5px;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.3s ease;
+      }
+
+      nav ul li a.active {
+        border-bottom: 2px solid #fff;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="registro.html">Registro de usuario</a></li>
+          <li><a href="#" onclick="loadData()">Grilla en JQuery</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="content hidden" id="grilla">
+      <h2>Grilla en JQuery</h2>
+      <table id="dataTable" class="display">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Sitio Web</th>
+            <th>Compañía</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+      function toggleTab(evt, tabName) {
+        var i, tabContent, tabLinks;
+        tabContent = document.getElementsByClassName("content");
+        for (i = 0; i < tabContent.length; i++) {
+          tabContent[i].classList.add("hidden");
+        }
+        tabLinks = document.getElementsByTagName("a");
+        for (i = 0; i < tabLinks.length; i++) {
+          tabLinks[i].classList.remove("active");
+        }
+        document.getElementById(tabName).classList.remove("hidden");
+        evt.currentTarget.classList.add("active");
+      }
+      function loadData() {
+        $.ajax({
+          url: "https://jsonplaceholder.typicode.com/users", // Reemplaza 'URL_DEL_JSON' por la URL de tu JSON
+          dataType: "json",
+          success: function (data) {
+            // Configuración de DataTables
+            $("#dataTable").DataTable({
+              data: data,
+              columns: [
+                { data: "id" },
+                { data: "name" },
+                { data: "username" },
+                { data: "email" },
+                {
+                  data: "address",
+                  render: function (data) {
+                    return (
+                      data.street +
+                      ", " +
+                      data.suite +
+                      ", " +
+                      data.city +
+                      ", " +
+                      data.zipcode
+                    );
+                  },
+                },
+                { data: "phone" },
+                { data: "website" },
+                {
+                  data: "company",
+                  render: function (data) {
+                    return data.name + " - " + data.catchPhrase;
+                  },
+                },
+              ],
+            });
+
+            // Mostrar la grilla
+            $("#grilla").removeClass("hidden");
+          },
+          error: function () {
+            alert("Error al cargar los datos.");
+          },
+        });
+      }
+    </script>
+  </body>
 </html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registro de Usuario</title>
+    <!-- Estilos del menú (como antes) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      /* Estilos del formulario */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      form input[type="text"],
+      form input[type="email"],
+      form input[type="password"],
+      form input[type="date"],
+      form input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+      }
+
+      form button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+      }
+
+      form button:hover {
+        background-color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li>
+            <a href="#" onclick="toggleTab(event, 'grilla')"
+              >Grilla en JQuery</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="content">
+      <h2>Registro de Usuario</h2>
+      <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required />
+
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" required />
+
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" required />
+
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" disabled />
+
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" required />
+
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" pattern="[a-zA-Z0-9]+" required />
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" required />
+
+        <label for="confirmacion">Confirmación de Contraseña:</label>
+        <input type="password" id="confirmacion" required />
+
+        <!-- Sección de enfermedades -->
+        <fieldset>
+          <legend>Enfermedades</legend>
+          <label>
+            <input type="radio" name="enfermedades" value="no" checked />
+            No ha sufrido de enfermedades
+          </label>
+          <label>
+            <input type="radio" name="enfermedades" value="si" />
+            Sí, ha sufrido de enfermedades
+          </label>
+
+          <div id="preguntaContagiosas" style="display: none">
+            <label>
+              <input
+                type="radio"
+                name="enfermedadesContagiosas"
+                value="no"
+                checked
+              />
+              No son contagiosas
+            </label>
+            <label>
+              <input type="radio" name="enfermedadesContagiosas" value="si" />
+              Sí, son contagiosas
+            </label>
+          </div>
+
+          <div id="preguntaCuales" style="display: none">
+            <label for="enfermedadesContagiosasCuales">Indique cuáles:</label>
+            <textarea
+              id="enfermedadesContagiosasCuales"
+              rows="3"
+              cols="30"
+              disabled
+            ></textarea>
+          </div>
+        </fieldset>
+
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+
+    <script>
+      // JavaScript
+      function calcularEdad() {
+        const fechaNacimientoInput = document.getElementById("fechaNacimiento");
+        const edadInput = document.getElementById("edad");
+
+        const fechaNacimiento = new Date(fechaNacimientoInput.value);
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+
+        if (
+          hoy.getMonth() < fechaNacimiento.getMonth() ||
+          (hoy.getMonth() === fechaNacimiento.getMonth() &&
+            hoy.getDate() < fechaNacimiento.getDate())
+        ) {
+          edad--;
+        }
+
+        edadInput.value = edad;
+      }
+
+      const fechaNacimientoInput = document.getElementById("fechaNacimiento");
+      fechaNacimientoInput.addEventListener("change", calcularEdad);
+
+      const enfermedadesRadios = document.querySelectorAll(
+        'input[name="enfermedades"]'
+      );
+      const preguntaContagiosas = document.getElementById(
+        "preguntaContagiosas"
+      );
+      const enfermedadesContagiosasRadios = document.querySelectorAll(
+        'input[name="enfermedadesContagiosas"]'
+      );
+      const preguntaCuales = document.getElementById("preguntaCuales");
+      const enfermedadesContagiosasCuales = document.getElementById(
+        "enfermedadesContagiosasCuales"
+      );
+
+      enfermedadesRadios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (radio.value === "si") {
+            preguntaContagiosas.style.display = "block";
+          } else {
+            preguntaContagiosas.style.display = "none";
+            preguntaCuales.style.display = "none";
+            enfermedadesContagiosasRadios.forEach(
+              (radio) => (radio.checked = false)
+            );
+            enfermedadesContagiosasCuales.value = "";
+          }
+        });
+      });
+
+      enfermedadesContagiosasRadios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (radio.value === "si") {
+            preguntaCuales.style.display = "block";
+            enfermedadesContagiosasCuales.disabled = false; // Habilitar el campo de texto
+          } else {
+            preguntaCuales.style.display = "none";
+            enfermedadesContagiosasCuales.value = "";
+            enfermedadesContagiosasCuales.disabled = true; // Deshabilitar el campo de texto
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
